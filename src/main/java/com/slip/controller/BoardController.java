@@ -21,32 +21,32 @@ public class BoardController {
     private final PostService postService;
 
     //게시글 생성
-    @PostMapping("/posts")
+    @PostMapping("/posts/create")
     public void post(@RequestBody @Valid PostCreate postCreate){
         postService.write(postCreate);
     }
 
-    //게시글 조회
+    //게시글 단건조회
     @GetMapping("/posts/{postId}")
     public PostResponse get(@PathVariable Long postId){
         return postService.get(postId);
     }
 
-    //게시글 페이징 처리는 나중에 아직 이해하지 못함
-    /*
-    * @GetMapping("/posts")
+
+    //게시글 전체 조회
+    @GetMapping("/posts")
     public List<PostResponse> getAllPosts(@PageableDefault(size = 5) Pageable pageable){
         return postService.getAllPosts(pageable);
     }
-    * */
+
 
     //게시글 수정
-    @PatchMapping("/posts/{postId}")
+    @PatchMapping("/posts/update/{postId}")
     public void update(@PathVariable Long postId, @RequestBody @Valid PostEdit request){
         postService.update(postId, request);
     }
 
-    @DeleteMapping("/posts/{postId}")
+    @DeleteMapping("/posts/delete/{postId}")
     public void delete(@PathVariable Long postId){
         postService.delete(postId);
     }

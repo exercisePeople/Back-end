@@ -104,7 +104,6 @@ public class PostControllerTest {
                                 .build()
                 )
                 .collect(Collectors.toList());
-
         postRepository.saveAll(requestPosts);
 
         //expected
@@ -113,9 +112,9 @@ public class PostControllerTest {
         )
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.length()", Matchers.is(5)))
-                .andExpect(jsonPath("$[0].id").value(25))
-                .andExpect(jsonPath("$.[0].title").value("빈코 제목 = 25"))
-                .andExpect(jsonPath("$.[0].content").value("빈코 내용 = 25"))
+                .andExpect(jsonPath("$.[0].id").value(30))
+                .andExpect(jsonPath("$.[0].title").value("빈코 제목 = 30"))
+                .andExpect(jsonPath("$.[0].content").value("빈코 내용 = 30"))
                 .andDo(print());
     }
 

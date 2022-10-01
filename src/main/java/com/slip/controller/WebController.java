@@ -19,12 +19,12 @@ public class WebController {
 
     private final UserService userService;
 
-    @GetMapping("/member")
+    @GetMapping("/login")
     public List<User> findAllMember(){
         return userRepository.findAll();
     }
 
-    @PostMapping("/member")
+    @PostMapping("/join")
     public String login(@RequestBody UserRequest user) throws AlreadyExistException {
         return userService.register(user);
     }
