@@ -1,16 +1,17 @@
 package com.slip.service;
 
 import com.slip.Entitiy.Post;
+import com.slip.editor.PostEditor;
+import com.slip.exception.PostNotFound;
 import com.slip.repository.PostRepository;
 import com.slip.response.PostResponse;
 import com.slip.vo.PostCreate;
+import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-import java.util.stream.Collectors;
+import javax.transaction.Transactional;
 
 @Slf4j
 @Service
@@ -46,4 +47,26 @@ public class PostService {
     }
     * */
 
+    @Transactional
+    public void update(Long id, PostEdit postEdit) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(RuntimeException::new);
+
+        PostEditor.PostEditorBuilder postEditorBuilder = post.toEditor();
+
+        PostEditor postEditor = postEditorBuilder
+                .title(postEdit.getTitle())
+                .content(postEdit.getContent())
+                .build();
+
+        post.update(postEditor);
+    }
+
+
+    public void delete(Long id) {
+        Post post = postRepository.findById(id)
+                .orElseThrow(PostNotFound::new);
+
+        postRepository.delete(post);
+    }
 }

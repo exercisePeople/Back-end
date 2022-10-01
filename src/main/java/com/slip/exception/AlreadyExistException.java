@@ -1,4 +1,4 @@
-package com.slip.service;
+package com.slip.exception;
 
 public class AlreadyExistException extends Throwable {
 }

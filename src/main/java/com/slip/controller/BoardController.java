@@ -3,6 +3,7 @@ package com.slip.controller;
 import com.slip.response.PostResponse;
 import com.slip.service.PostService;
 import com.slip.vo.PostCreate;
+import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
@@ -39,6 +40,16 @@ public class BoardController {
     }
     * */
 
+    //게시글 수정
+    @PatchMapping("/posts/{postId}")
+    public void update(@PathVariable Long postId, @RequestBody @Valid PostEdit request){
+        postService.update(postId, request);
+    }
+
+    @DeleteMapping("/posts/{postId}")
+    public void delete(@PathVariable Long postId){
+        postService.delete(postId);
+    }
 
 
 }

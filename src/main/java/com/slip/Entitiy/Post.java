@@ -1,5 +1,6 @@
 package com.slip.Entitiy;
 
+import com.slip.editor.PostEditor;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -25,5 +26,16 @@ public class Post {
     public Post(String title, String content){
         this.title = title;
         this.content = content;
+    }
+
+    public void update(PostEditor postEditor) {
+        title = postEditor.getTitle();
+        content = postEditor.getContent();
+    }
+
+    public PostEditor.PostEditorBuilder toEditor() {
+        return PostEditor.builder()
+                .title(title)
+                .content(content);
     }
 }

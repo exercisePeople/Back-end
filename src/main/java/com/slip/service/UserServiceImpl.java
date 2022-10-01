@@ -1,5 +1,6 @@
 package com.slip.service;
 
+import com.slip.exception.AlreadyExistException;
 import com.slip.user.User;
 import com.slip.user.UserRepository;
 import com.slip.vo.UserRequest;

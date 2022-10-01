@@ -1,6 +1,6 @@
 package com.slip.controller;
 
-import com.slip.service.AlreadyExistException;
+import com.slip.exception.AlreadyExistException;
 import com.slip.service.UserService;
 import com.slip.user.User;
 import com.slip.user.UserRepository;

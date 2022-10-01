@@ -5,6 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.slip.Entitiy.Post;
 import com.slip.repository.PostRepository;
 import com.slip.vo.PostCreate;
+import com.slip.vo.PostEdit;
 import org.hamcrest.Matchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
@@ -117,4 +118,62 @@ public class PostControllerTest {
                 .andExpect(jsonPath("$.[0].content").value("빈코 내용 = 25"))
                 .andDo(print());
     }
+
+    @Test
+    @DisplayName("글 제목 수정")
+    void 글수정() throws Exception{
+        //give
+        Post post = Post.builder()
+                .title("빈코 제목")
+                .content("빈코 내용")
+                .build();
+        // DB에 들어갈 기존 게시글 하나 생성 이전과 마찬가지로 Build패턴을 이용하여 save 메서드로 저장
+
+
+        postRepository.save(post);
+
+        PostEdit postEdit = PostEdit.builder()
+                .title("빈코 제목 수정")
+                .content("빈코 내용 수정")
+                .build();
+
+        //expected
+
+        mockMvc.perform(MockMvcRequestBuilders.patch("/posts/{postId}", post.getId())
+                .contentType(APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(postEdit))
+        )
+                .andExpect(status().isOk())
+                .andDo(print());
+
+        // mock Mvc를 이용하여 url 매핑 후 controller 에 DB에 저장한 기존 게시글의 아이디와 수정할 내용을 담은 postEdit을 넘겨준다
+    }
+
+    @Test
+    @DisplayName("글 삭제")
+    void 글삭제() throws Exception{
+        //give
+        Post post = Post.builder()
+                .title("빈코 제목")
+                .content("빈코 내용")
+                .build();
+
+        postRepository.save(post);
+
+        //expected
+        mockMvc.perform(MockMvcRequestBuilders.delete("/posts/{postId}", post.getId())
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isOk())
+                .andDo(print());
+    }
+
+    @Test
+    @DisplayName("존재하지 않는 글 삭제")
+    void 글삭제예외처리() throws Exception{
+        mockMvc.perform(MockMvcRequestBuilders.delete("/posts/{postsId}", 1L)
+                .contentType(APPLICATION_JSON))
+                .andExpect(status().isNotFound())
+                .andDo(print());
+    }
+
 }
