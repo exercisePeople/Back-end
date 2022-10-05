@@ -20,7 +20,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String home(){
-        return "hello aws";
+        return "hello awsyes";
     }
 
     private final PostService postService;
