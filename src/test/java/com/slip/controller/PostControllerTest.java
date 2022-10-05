@@ -1,4 +1,4 @@
-package com.slip.controller;
+/* package com.slip.controller;
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -91,7 +91,7 @@ public class PostControllerTest {
                 .andExpect(jsonPath("$.content").value("글 내용이 적혀 있습니다"))
                 .andDo(print());
     }
-/*
+
     @Test
     @DisplayName("글 1페이지 조회")
     void 글페이지조회() throws Exception{
@@ -117,7 +117,7 @@ public class PostControllerTest {
                 .andExpect(jsonPath("$.[0].content").value("빈코 내용 = 30"))
                 .andDo(print());
     }
-*/
+
     @Test
     @DisplayName("글 제목 수정")
     void 글수정() throws Exception{
@@ -176,3 +176,4 @@ public class PostControllerTest {
     }
 
 }
+*/
