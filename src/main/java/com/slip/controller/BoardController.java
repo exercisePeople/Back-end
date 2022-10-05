@@ -18,6 +18,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 
+    @GetMapping("/")
+    public String home(){
+        return "hello aws";
+    }
+
     private final PostService postService;
 
     //게시글 생성
