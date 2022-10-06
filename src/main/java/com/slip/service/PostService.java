@@ -23,13 +23,16 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+    //게시글 작성
     public void write(PostCreate postCreate) {
         Post post = Post.builder()
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
                 .build();
         postRepository.save(post);
+        System.out.println("게시글 작성 완료");
     }
+
 
     public PostResponse get(Long id){
         Post post = postRepository.findById(id)
@@ -51,6 +54,7 @@ public class PostService {
     }
 
 
+    //게시글 수정
     @Transactional
     public void update(Long id, PostEdit postEdit) {
         Post post = postRepository.findById(id)
@@ -64,14 +68,17 @@ public class PostService {
                 .build();
 
         post.update(postEditor);
+        System.out.println("게시글 수정 완료");
     }
 
 
+    //게시글 삭제
     public void delete(Long id) {
         Post post = postRepository.findById(id)
                 .orElseThrow(PostNotFound::new);
 
         postRepository.delete(post);
+        System.out.println("게시글 삭제 완료");
     }
 
 }
