@@ -24,6 +24,8 @@ public class WebController {
         return userRepository.save(User.builder()
                 .userId(user.get("userId"))
                 .password(passwordEncoder.encode(user.get("password")))
+                .email(user.get("email"))
+                .nickname(user.get("nickname"))
                 .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 USER 로 설정
                 .build()).getIdx();
     }
