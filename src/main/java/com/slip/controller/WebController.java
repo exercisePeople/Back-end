@@ -25,7 +25,7 @@ public class WebController {
                 .userId(user.get("userId"))
                 .password(passwordEncoder.encode(user.get("password")))
                 .roles(Collections.singletonList("ROLE_USER")) // 최초 가입시 USER 로 설정
-                .build()).getId();
+                .build()).getIdx();
     }
 
     //로그인
