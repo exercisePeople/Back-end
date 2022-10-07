@@ -24,10 +24,10 @@ public class User implements UserDetails{
     @Column(name = "idx" , nullable = false)
     private Long id;
 
-    @Column(name = "userId")
+    @Column(name = "userId" , nullable = false, unique = true)
     private String userId;
 
-    @Column(name = "password")
+    @Column(name = "password", nullable = false)
     private String password;
 
     @Column(name = "email")
