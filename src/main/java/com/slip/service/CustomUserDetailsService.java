@@ -1,6 +1,6 @@
 package com.slip.service;
 
-import com.slip.user.UserRepository;
+import com.slip.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

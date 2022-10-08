@@ -1,9 +1,8 @@
-package com.slip.user;
+package com.slip.repository;
 
+import com.slip.Entitiy.User;
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Optional;
 
 

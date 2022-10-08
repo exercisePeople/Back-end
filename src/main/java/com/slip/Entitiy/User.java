@@ -1,4 +1,4 @@
-package com.slip.user;
+package com.slip.Entitiy;
 
 
 import lombok.*;

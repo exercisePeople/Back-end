@@ -1,8 +1,8 @@
 package com.slip.controller;
 
 import com.slip.jwt.JwtTokenProvider;
-import com.slip.user.User;
-import com.slip.user.UserRepository;
+import com.slip.Entitiy.User;
+import com.slip.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
