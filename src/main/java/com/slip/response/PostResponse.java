@@ -15,17 +15,21 @@ public class PostResponse {
     private final String title;
     private final String content;
 
+    private final String postUserId;
+
     //오버로딩
     public PostResponse(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
         this.content = post.getContent();
+        this.postUserId =post.getPostUserId();
     }
 
     @Builder
-    public PostResponse(Long id, String title, String content){
+    public PostResponse(Long id, String title, String content, String postUserId){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
         this.content = content;
+        this.postUserId =postUserId;
     }
 }

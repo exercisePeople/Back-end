@@ -18,7 +18,7 @@ public class PostCreate {
     private String content;
 
     @Builder
-    public PostCreate(String title, String content){
+    public PostCreate(String title, String content,String postUserId){
         this.title = title;
         this.content = content;
     }

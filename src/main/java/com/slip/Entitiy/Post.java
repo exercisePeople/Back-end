@@ -22,6 +22,10 @@ public class Post {
     @Lob
     public String content;
 
+    public String postUserId;
+
+    public int hits;
+
     @Builder
     public Post(String title, String content){
         this.title = title;

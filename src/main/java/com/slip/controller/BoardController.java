@@ -40,8 +40,8 @@ public class BoardController {
 
     //게시글 전체 조회
     @GetMapping("/posts")
-    public List<PostResponse> getAllPosts(@PageableDefault(size = 5) Pageable pageable){
-        return postService.getAllPosts(pageable);
+    public List<PostResponse> getAllPosts(){
+        return postService.getAllPosts();
     }
 
 
@@ -55,6 +55,8 @@ public class BoardController {
     public void delete(@PathVariable Long postId){
         postService.delete(postId);
     }
+
+
 
 
 }

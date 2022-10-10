@@ -7,8 +7,11 @@ public class PostNotFound extends HttplogException{
         super(MESSAGE);
     }
 
+
     @Override
     public int getStatusCode(){
         return 404;
     }
+
+
 }
