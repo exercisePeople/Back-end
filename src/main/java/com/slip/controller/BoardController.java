@@ -20,7 +20,7 @@ public class BoardController {
 
     @GetMapping("/")
     public String home(){
-        return "hello awsyes";
+        return "AWS 연결 성공";
     }
 
     private final PostService postService;
@@ -51,11 +51,17 @@ public class BoardController {
         postService.update(postId, request);
     }
 
+    //게시글 삭제
     @DeleteMapping("/posts/delete/{postId}")
     public void delete(@PathVariable Long postId){
         postService.delete(postId);
     }
 
+
+    @GetMapping("/posts/postUserId={postUserId}")
+    public List<PostResponse> getUser(@PathVariable String postUserId){
+        return postService.getUser(postUserId);
+    }
 
 
 

@@ -1,17 +1,14 @@
 package com.slip.service;
 
 import com.slip.Entitiy.Post;
-import com.slip.Entitiy.User;
 import com.slip.editor.PostEditor;
 import com.slip.exception.PostNotFound;
 import com.slip.repository.PostRepository;
-import com.slip.repository.UserRepository;
 import com.slip.response.PostResponse;
 import com.slip.vo.PostCreate;
 import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
@@ -25,13 +22,12 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    private final UserRepository userRepository;
-
     //게시글 작성
     public void write(PostCreate postCreate) {
         Post post = Post.builder()
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
+                .postUserId(postCreate.getPostUserId())
                 .build();
         postRepository.save(post);
         System.out.println("게시글 작성 완료");
@@ -88,15 +84,9 @@ public class PostService {
     }
 
     //게시글 유저 조회
-    public PostResponse getUser(Long postUserId){
-        Post post = postRepository.findById(postUserId)
-                .orElseThrow(IllegalAccessError::new);
-
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .postUserId(post.getPostUserId())
-                .build();
+    public List<PostResponse> getUser(String postUserId){
+        return postRepository.findPostByPostUserIdOrderByPostUserIdDesc(postUserId).stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
     }
 }

@@ -27,9 +27,10 @@ public class Post {
     public int hits;
 
     @Builder
-    public Post(String title, String content){
+    public Post(String title, String content, String postUserId){
         this.title = title;
         this.content = content;
+        this.postUserId = postUserId;
     }
 
     public void update(PostEditor postEditor) {

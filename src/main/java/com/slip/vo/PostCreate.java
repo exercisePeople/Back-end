@@ -16,10 +16,14 @@ public class PostCreate {
     private String title;
     @NotBlank(message = "내용을 입력해주세요")
     private String content;
+    @NotBlank
+    private String postUserId;
+
 
     @Builder
     public PostCreate(String title, String content,String postUserId){
         this.title = title;
         this.content = content;
+        this.postUserId = postUserId;
     }
 }
