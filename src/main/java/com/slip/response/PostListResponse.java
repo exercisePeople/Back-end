@@ -14,7 +14,7 @@ public class PostListResponse {
     private final Long id;
     private final String title;
 
-    private final String userPostId;
+    private final String postNickname;
 
     private final int hits;
 
@@ -22,15 +22,15 @@ public class PostListResponse {
     public PostListResponse(Post post){
         this.id = post.getId();
         this.title = post.getTitle();
-        this.userPostId =post.getPostUserId();
+        this.postNickname = post.getPostNickname();
         this.hits = post.getHits();
     }
 
     @Builder
-    public PostListResponse(Long id, String title, String userPostId, int hits){
+    public PostListResponse(Long id, String title, String postNickname, String user, int hits){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
-        this.userPostId =userPostId;
+        this.postNickname = postNickname;
         this.hits =hits;
     }
 }

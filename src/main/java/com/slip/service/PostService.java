@@ -1,10 +1,14 @@
 package com.slip.service;
 
+import com.slip.Entitiy.Comment;
 import com.slip.Entitiy.Post;
+import com.slip.Entitiy.User;
 import com.slip.editor.PostEditor;
 import com.slip.exception.PostNotFound;
+import com.slip.repository.CommentRepository;
 import com.slip.repository.PostRepository;
 import com.slip.response.PostResponse;
+import com.slip.vo.CommentRequest;
 import com.slip.vo.PostCreate;
 import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
@@ -22,15 +26,17 @@ public class PostService {
 
     private final PostRepository postRepository;
 
+    private final CommentRepository commentRepository;
+
     //게시글 작성
+    @Transactional
     public void write(PostCreate postCreate) {
         Post post = Post.builder()
+                .postNickname(postCreate.getPostNickname())
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
-                .postUserId(postCreate.getPostUserId())
                 .build();
-        postRepository.save(post);
-        System.out.println("게시글 작성 완료");
+       postRepository.save(post);
     }
 
 
@@ -41,6 +47,7 @@ public class PostService {
 
         return PostResponse.builder()
                 .id(post.getId())
+                .postNickname(post.getPostNickname())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .build();
@@ -50,7 +57,7 @@ public class PostService {
     //게시글 전체 조회
     @Transactional
     public List<PostResponse> getAllPosts() {
-        return postRepository.findAllByOrderByIdDesc().stream()
+        return postRepository.findPostByIdAndTitleAndPostNicknameAndHitsOrderByIdDesc().stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
@@ -83,10 +90,22 @@ public class PostService {
         System.out.println("게시글 삭제 완료");
     }
 
+    /*
     //게시글 유저 조회
-    public List<PostResponse> getUser(String postUserId){
-        return postRepository.findPostByPostUserIdOrderByPostUserIdDesc(postUserId).stream()
+    public List<PostResponse> getUser(Long id){
+        return postRepository.findPostByUser_NicknameOrderByIdIdDesc(id).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
+    }
+*/
+    //댓글 작성하기
+    @Transactional
+    public void writeComment(CommentRequest commentRequest) {
+        Comment comment = Comment.builder()
+                .comment(commentRequest.getComment())
+                .comment(commentRequest.getWriter())
+                .build();
+        commentRepository.save(comment);
+        System.out.println("댓글 작성 완료");
     }
 }

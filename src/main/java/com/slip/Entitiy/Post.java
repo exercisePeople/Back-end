@@ -5,8 +5,13 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @Entity
@@ -22,16 +27,25 @@ public class Post {
     @Lob
     public String content;
 
-    public String postUserId;
-
     public int hits;
 
+    @JoinColumn(name = "postNickname")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private String postNickname;
+
+
+    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @OrderBy("id asc")
+    private List<Comment> comments; // 댓글 정렬
+
     @Builder
-    public Post(String title, String content, String postUserId){
+    public Post(String postNickname,String title, String content){
+        this.postNickname = postNickname;
         this.title = title;
         this.content = content;
-        this.postUserId = postUserId;
     }
+
+
 
     public void update(PostEditor postEditor) {
         title = postEditor.getTitle();

@@ -1,13 +1,17 @@
 package com.slip.controller;
 
+import com.slip.Entitiy.User;
+import com.slip.response.CommentResponse;
 import com.slip.response.PostResponse;
 import com.slip.service.PostService;
+import com.slip.vo.CommentRequest;
 import com.slip.vo.PostCreate;
 import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.web.PageableDefault;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -18,12 +22,14 @@ import java.util.List;
 @RequiredArgsConstructor
 public class BoardController {
 
+    private final PostService postService;
+
+    // 연결 성공 조회
     @GetMapping("/")
     public String home(){
         return "AWS 연결 성공";
     }
 
-    private final PostService postService;
 
     //게시글 생성
     @PostMapping("/posts/create")
@@ -58,11 +64,20 @@ public class BoardController {
     }
 
 
+    /*
+    // 유저 게시블 조회(내가쓴글 조회)
     @GetMapping("/posts/postUserId={postUserId}")
-    public List<PostResponse> getUser(@PathVariable String postUserId){
-        return postService.getUser(postUserId);
+    public List<PostResponse> getUser(@PathVariable Long id){
+        return postService.getUser(id);
     }
+    */
 
+
+    //게시글 댓글
+    @PostMapping("/posts/comment/write")
+    public void commentSave(@PathVariable CommentRequest commentRequest){
+        postService.writeComment(commentRequest);
+    }
 
 
 }

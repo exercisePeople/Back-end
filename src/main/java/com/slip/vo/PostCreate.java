@@ -1,29 +1,29 @@
 package com.slip.vo;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import com.slip.Entitiy.Post;
+import com.slip.Entitiy.User;
+import lombok.*;
+import org.springframework.security.core.parameters.P;
 
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
-@ToString
-@Setter
+
 @Getter
+@NoArgsConstructor
 public class PostCreate {
 
-    @NotBlank(message = "제목 입력해주세요")
+    private String postNickname;
     private String title;
-    @NotBlank(message = "내용을 입력해주세요")
     private String content;
-    @NotBlank
-    private String postUserId;
 
 
     @Builder
-    public PostCreate(String title, String content,String postUserId){
+    public PostCreate(String postNickname,String title, String content){
+        this.postNickname = postNickname;
         this.title = title;
         this.content = content;
-        this.postUserId = postUserId;
     }
+
+
 }
