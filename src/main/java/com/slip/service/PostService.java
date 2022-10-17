@@ -29,11 +29,12 @@ public class PostService {
 
     private final CommentRepository commentRepository;
 
+
     //게시글 작성
     @Transactional
     public void write(PostCreate postCreate) {
         Post post = Post.builder()
-                .postNickname(postCreate.getPostNickname())
+                .userId(postCreate.getUserId())
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
                 .build();
@@ -51,7 +52,7 @@ public class PostService {
 
         return PostResponse.builder()
                 .id(post.getId())
-                .postNickname(post.getPostNickname())
+                .userId(post.getUserId())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .build();
@@ -65,12 +66,10 @@ public class PostService {
     }
 
 
-    //게시글 유저 조회
-    public List<PostResponse> getUser(String postNickname){
-        return postRepository.findByPostNicknameOrderByIdDesc(postNickname);
-
+    //게시글 내가 쓴글 조회
+    public List<PostResponse> getUser(String userId){
+        return postRepository.findByUserIdOrderByIdDesc(userId);
     }
-
 
 
     //게시글 수정
@@ -111,8 +110,4 @@ public class PostService {
         commentRepository.save(comment);
         System.out.println("댓글 작성 완료");
     }
-
-    //조회수 증가
-
-
 }

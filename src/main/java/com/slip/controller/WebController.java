@@ -32,13 +32,14 @@ public class WebController {
 
     //로그인
     @PostMapping("/login")
-    public String login(@RequestBody Map<String, String> user){
+    public String login(@RequestBody Map<String, String> user) {
         User member = userRepository.findByUserId(user.get("userId"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 ID 입니다."));
-        if (!passwordEncoder.matches(user.get("password"), member.getPassword())){
+        if (!passwordEncoder.matches(user.get("password"), member.getPassword())) {
             throw new IllegalArgumentException("잘못된 비밀번호입니다.");
         }
-        return jwtTokenProvider.createToken(member.getUsername(),member.getRoles());
-    }
 
+
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+    }
 }

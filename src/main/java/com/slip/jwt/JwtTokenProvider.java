@@ -1,5 +1,6 @@
 package com.slip.jwt;
 
+import com.slip.Entitiy.User;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -36,6 +37,7 @@ public class JwtTokenProvider {
 
     //JWT 토큰 생성
     public String createToken(String userPk, List<String> roles){
+        System.out.println("회원가입 완료");
         Claims claims = Jwts.claims().setSubject(userPk); // JWT payload 에 저장되는 정보단위
         claims.put("roles", roles); //정보는 key / value 쌍으로 저장된다.
         Date now = new Date();
@@ -44,7 +46,7 @@ public class JwtTokenProvider {
                 .setIssuedAt(now) // 토큰 발행 시간 정보
                 .setExpiration(new Date(now.getTime() + tokenValidTime)) // set Expire Time
                 .signWith(SignatureAlgorithm.HS256, secretKey) // 사용할 암호화 알고리즘과
-                                                                // signature 에 들어갈 secret값 세팅
+                                                 // signature 에 들어갈 secret값 세팅
                 .compact();
     }
 
@@ -73,6 +75,7 @@ public class JwtTokenProvider {
             return false;
         }
     }
+
 
 
 

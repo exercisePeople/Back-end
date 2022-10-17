@@ -1,6 +1,7 @@
 package com.slip.repository;
 
 import com.slip.Entitiy.Post;
+import com.slip.Entitiy.User;
 import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -14,7 +15,7 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     List<PostListResponse> findAllByOrderByIdDesc();
 
-    List<PostResponse> findByPostNicknameOrderByIdDesc(String postNickname);
+    List<PostResponse> findByUserIdOrderByIdDesc(String userId);
 
     @Modifying
     @Query("update Post p set p.hits = p.hits + 1 where p.id = :id")

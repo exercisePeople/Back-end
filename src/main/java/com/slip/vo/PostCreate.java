@@ -13,14 +13,15 @@ import javax.validation.constraints.NotNull;
 @NoArgsConstructor
 public class PostCreate {
 
-    private String postNickname;
+
     private String title;
     private String content;
+    private String userId;
 
 
     @Builder
-    public PostCreate(String postNickname,String title, String content){
-        this.postNickname = postNickname;
+    public PostCreate(String userId,String title, String content){
+        this.userId = userId;
         this.title = title;
         this.content = content;
     }

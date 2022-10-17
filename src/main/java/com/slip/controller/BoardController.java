@@ -39,6 +39,7 @@ public class BoardController {
         postService.write(postCreate);
     }
 
+
     //게시글 단건조회
     @GetMapping("/posts/{postId}")
     public PostResponse get(@PathVariable Long postId){
@@ -59,6 +60,7 @@ public class BoardController {
         postService.update(postId, request);
     }
 
+
     //게시글 삭제
     @DeleteMapping("/posts/delete/{postId}")
     public void delete(@PathVariable Long postId){
@@ -66,13 +68,11 @@ public class BoardController {
     }
 
 
-
     // 유저 게시블 조회(내가쓴글 조회)
-    @GetMapping("/posts/postNickname={postNickname}")
-    public List<PostResponse> getUser(@PathVariable String postNickname){
-        return postService.getUser(postNickname);
+    @GetMapping("/posts/user/{userId}")
+    public List<PostResponse> getUser(@PathVariable String userId){
+        return postService.getUser(userId);
     }
-
 
 
     //게시글 댓글

@@ -4,11 +4,9 @@ import com.slip.editor.PostEditor;
 import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
-import java.util.List;
+
 
 @Getter
 @Entity
@@ -27,18 +25,14 @@ public class Post {
     @Setter
     public int hits;
 
-    @JoinColumn(name = "postNickname")
+
+    @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private String postNickname;
-
-
-    @OneToMany(mappedBy = "posts", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc")
-    private List<Comment> comments; // 댓글 정렬
+    private String userId;
 
     @Builder
-    public Post(String postNickname,String title, String content){
-        this.postNickname = postNickname;
+    public Post(String userId,String title, String content){
+        this.userId = userId;
         this.title = title;
         this.content = content;
     }

@@ -18,4 +18,6 @@ public class CustomUserDetailsService implements UserDetailsService {
         return userRepository.findByUserId(userId)
                 .orElseThrow(() -> new IllegalArgumentException("사용자가 존재하지 않습니다."));
     }
+
+
 }

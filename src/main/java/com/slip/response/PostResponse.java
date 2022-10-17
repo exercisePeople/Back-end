@@ -1,6 +1,7 @@
 package com.slip.response;
 
 import com.slip.Entitiy.Post;
+import com.slip.Entitiy.User;
 import lombok.Builder;
 import lombok.Getter;
 
@@ -15,7 +16,7 @@ public class PostResponse {
     private String title;
     private String content;
 
-    private String postNickname;
+    private String userId;
 
     private int hits;
 
@@ -25,14 +26,14 @@ public class PostResponse {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.hits = post.getHits();
-        this.postNickname = post.getPostNickname();
+        this.userId = post.getUserId();
     }
 
     @Builder
-    public PostResponse(Long id, String title, String content,String postNickname){
+    public PostResponse(Long id, String title, String content,String userId){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
         this.content = content;
-        this.postNickname = postNickname;
+        this.userId = userId;
     }
 }

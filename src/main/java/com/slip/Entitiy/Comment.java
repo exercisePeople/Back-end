@@ -24,7 +24,7 @@ public class Comment {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(columnDefinition = "TEXT", nullable = false)
+    @Column(columnDefinition = "TEXT", nullable = false, name = "comment")
     private String comment;
 
     @Column(nullable = false, name = "writer")
@@ -41,7 +41,6 @@ public class Comment {
     @JoinColumn(name = "posts_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post posts;
-
 
     @Builder
     public Comment(String comment, String writer){
