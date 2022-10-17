@@ -1,10 +1,7 @@
 package com.slip.Entitiy;
 
 import com.slip.editor.PostEditor;
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
@@ -27,6 +24,7 @@ public class Post {
     @Lob
     public String content;
 
+    @Setter
     public int hits;
 
     @JoinColumn(name = "postNickname")
@@ -57,4 +55,6 @@ public class Post {
                 .title(title)
                 .content(content);
     }
+
+
 }

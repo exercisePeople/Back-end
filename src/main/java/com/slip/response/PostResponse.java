@@ -4,9 +4,6 @@ import com.slip.Entitiy.Post;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 @Getter
 public class PostResponse {
 
@@ -29,7 +26,6 @@ public class PostResponse {
         this.content = post.getContent();
         this.hits = post.getHits();
         this.postNickname = post.getPostNickname();
-
     }
 
     @Builder

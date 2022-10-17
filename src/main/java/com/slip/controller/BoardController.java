@@ -1,7 +1,9 @@
 package com.slip.controller;
 
+import com.slip.Entitiy.Post;
 import com.slip.Entitiy.User;
 import com.slip.response.CommentResponse;
+import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
 import com.slip.service.PostService;
 import com.slip.vo.CommentRequest;
@@ -46,7 +48,7 @@ public class BoardController {
 
     //게시글 전체 조회
     @GetMapping("/posts")
-    public List<PostResponse> getAllPosts(){
+    public List<PostListResponse> getAllPosts(){
         return postService.getAllPosts();
     }
 
@@ -64,13 +66,13 @@ public class BoardController {
     }
 
 
-    /*
+
     // 유저 게시블 조회(내가쓴글 조회)
-    @GetMapping("/posts/postUserId={postUserId}")
-    public List<PostResponse> getUser(@PathVariable Long id){
-        return postService.getUser(id);
+    @GetMapping("/posts/postNickname={postNickname}")
+    public List<PostResponse> getUser(@PathVariable String postNickname){
+        return postService.getUser(postNickname);
     }
-    */
+
 
 
     //게시글 댓글
@@ -78,6 +80,4 @@ public class BoardController {
     public void commentSave(@PathVariable CommentRequest commentRequest){
         postService.writeComment(commentRequest);
     }
-
-
 }

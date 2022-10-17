@@ -7,6 +7,7 @@ import com.slip.editor.PostEditor;
 import com.slip.exception.PostNotFound;
 import com.slip.repository.CommentRepository;
 import com.slip.repository.PostRepository;
+import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
 import com.slip.vo.CommentRequest;
 import com.slip.vo.PostCreate;
@@ -45,6 +46,9 @@ public class PostService {
         Post post = postRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
+        int cnt = post.getHits();
+        post.setHits(cnt + 1);
+
         return PostResponse.builder()
                 .id(post.getId())
                 .postNickname(post.getPostNickname())
@@ -56,11 +60,17 @@ public class PostService {
 
     //게시글 전체 조회
     @Transactional
-    public List<PostResponse> getAllPosts() {
-        return postRepository.findPostByIdAndTitleAndPostNicknameAndHitsOrderByIdDesc().stream()
-                .map(PostResponse::new)
-                .collect(Collectors.toList());
+    public List<PostListResponse> getAllPosts() {
+        return postRepository.findAllByOrderByIdDesc();
     }
+
+
+    //게시글 유저 조회
+    public List<PostResponse> getUser(String postNickname){
+        return postRepository.findByPostNicknameOrderByIdDesc(postNickname);
+
+    }
+
 
 
     //게시글 수정
@@ -90,14 +100,7 @@ public class PostService {
         System.out.println("게시글 삭제 완료");
     }
 
-    /*
-    //게시글 유저 조회
-    public List<PostResponse> getUser(Long id){
-        return postRepository.findPostByUser_NicknameOrderByIdIdDesc(id).stream()
-                .map(PostResponse::new)
-                .collect(Collectors.toList());
-    }
-*/
+
     //댓글 작성하기
     @Transactional
     public void writeComment(CommentRequest commentRequest) {
@@ -108,4 +111,8 @@ public class PostService {
         commentRepository.save(comment);
         System.out.println("댓글 작성 완료");
     }
+
+    //조회수 증가
+
+
 }

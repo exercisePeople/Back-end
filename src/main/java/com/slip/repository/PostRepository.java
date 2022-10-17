@@ -1,15 +1,22 @@
 package com.slip.repository;
 
 import com.slip.Entitiy.Post;
-import com.slip.Entitiy.User;
+import com.slip.response.PostListResponse;
+import com.slip.response.PostResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
 
-    //오류 났음 고쳐야함
-    List<Post> findPostByIdAndTitleAndPostNicknameAndHitsOrderByIdDesc();
 
-    //List<Post> findPostByUser_NicknameOrderByIdIdDesc(Long id);
+    List<PostListResponse> findAllByOrderByIdDesc();
+
+    List<PostResponse> findByPostNicknameOrderByIdDesc(String postNickname);
+
+    @Modifying
+    @Query("update Post p set p.hits = p.hits + 1 where p.id = :id")
+    int updateHits(Long id);
 }
