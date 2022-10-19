@@ -16,11 +16,12 @@ public class PostCreate {
 
     private String title;
     private String content;
-    private String userId;
+    private User userId;
+
 
 
     @Builder
-    public PostCreate(String userId,String title, String content){
+    public PostCreate(User userId,String title, String content){
         this.userId = userId;
         this.title = title;
         this.content = content;

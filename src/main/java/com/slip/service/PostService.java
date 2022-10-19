@@ -46,13 +46,12 @@ public class PostService {
     public PostResponse get(Long id){
         Post post = postRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
+        //조회수 기능 추가해야함
 
-        int cnt = post.getHits();
-        post.setHits(cnt + 1);
 
         return PostResponse.builder()
                 .id(post.getId())
-                .userId(post.getUserId())
+                .userId(post.getUserId().getNickname())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .build();
@@ -100,14 +99,4 @@ public class PostService {
     }
 
 
-    //댓글 작성하기
-    @Transactional
-    public void writeComment(CommentRequest commentRequest) {
-        Comment comment = Comment.builder()
-                .comment(commentRequest.getComment())
-                .comment(commentRequest.getWriter())
-                .build();
-        commentRepository.save(comment);
-        System.out.println("댓글 작성 완료");
-    }
 }

@@ -6,11 +6,13 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 
 @Getter
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@Table(name = "post")
 public class Post {
 
     @Id
@@ -25,13 +27,15 @@ public class Post {
     @Setter
     public int hits;
 
-
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private String userId;
+    private User userId;
+
+
 
     @Builder
-    public Post(String userId,String title, String content){
+    public Post(User userId,String title, String content){
         this.userId = userId;
         this.title = title;
         this.content = content;

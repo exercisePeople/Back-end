@@ -1,10 +1,7 @@
 package com.slip.Entitiy;
 
 import com.mysql.cj.protocol.ColumnDefinition;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 import org.springframework.data.annotation.CreatedDate;
@@ -12,9 +9,9 @@ import org.springframework.data.annotation.LastModifiedDate;
 
 import javax.persistence.*;
 
-@Builder
+
 @AllArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
 @Table(name = "comments")
 @Entity
@@ -36,14 +33,14 @@ public class Comment {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user; // 작성자
 
-
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "posts_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Post posts;
 
     @Builder
-    public Comment(String comment, String writer){
+    public Comment(Post posts,String comment, String writer){
+        this.posts = posts;
         this.comment = comment;
         this.writer = writer;
     }

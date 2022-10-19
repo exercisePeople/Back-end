@@ -1,9 +1,6 @@
 package com.slip.Entitiy;
 
-import lombok.AccessLevel;
-import lombok.Builder;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
@@ -16,6 +13,7 @@ import java.time.LocalDateTime;
 @Getter
 @Table(name = "Reservation")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
+@AllArgsConstructor
 public class Reservation{
 
     @Id
@@ -37,6 +35,10 @@ public class Reservation{
     @Column(name = "create_at")
     private LocalDateTime createAt;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private User user;
 
     @Builder
     public Reservation(int peoples,  int year, int month, int resTime) {

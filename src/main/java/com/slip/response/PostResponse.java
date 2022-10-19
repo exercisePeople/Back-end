@@ -26,7 +26,7 @@ public class PostResponse {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.hits = post.getHits();
-        this.userId = post.getUserId();
+        this.userId = post.getUserId().getNickname();
     }
 
     @Builder

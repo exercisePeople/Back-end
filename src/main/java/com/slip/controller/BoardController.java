@@ -2,9 +2,11 @@ package com.slip.controller;
 
 import com.slip.Entitiy.Post;
 import com.slip.Entitiy.User;
+import com.slip.repository.CommentRepository;
 import com.slip.response.CommentResponse;
 import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
+import com.slip.service.CommentService;
 import com.slip.service.PostService;
 import com.slip.vo.CommentRequest;
 import com.slip.vo.PostCreate;
@@ -18,6 +20,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @RestController
@@ -25,6 +28,8 @@ import java.util.List;
 public class BoardController {
 
     private final PostService postService;
+
+    private final CommentService commentService;
 
     // 연결 성공 조회
     @GetMapping("/")
@@ -76,8 +81,14 @@ public class BoardController {
 
 
     //게시글 댓글
-    @PostMapping("/posts/comment/write")
-    public void commentSave(@PathVariable CommentRequest commentRequest){
-        postService.writeComment(commentRequest);
+    @PostMapping("/posts/{id}/comment/write")
+    public void commentSave(@PathVariable Long id,@RequestBody CommentRequest commentRequest){
+        commentService.writeComment(id,commentRequest);
+    }
+
+    //게시글 댓글 조회하기
+    @GetMapping("/posts/{id}/comment")
+    public List<CommentResponse> getAllComment(@PathVariable Long id){
+        return commentService.findComment(id);
     }
 }
