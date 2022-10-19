@@ -15,6 +15,7 @@ import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -29,6 +30,7 @@ public class PostService {
 
     private final CommentRepository commentRepository;
 
+    private Long hits;
 
     //게시글 작성
     @Transactional
@@ -46,14 +48,13 @@ public class PostService {
     public PostResponse get(Long id){
         Post post = postRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
-        //조회수 기능 추가해야함
-
 
         return PostResponse.builder()
                 .id(post.getId())
-                .userId(post.getUserId().getNickname())
+                .userId(post.getUserId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .hits(post.getHits())
                 .build();
     }
 
@@ -98,5 +99,10 @@ public class PostService {
         System.out.println("게시글 삭제 완료");
     }
 
+    //게시글 조회수 증가
+    public void updateHits(Long postId){
+        int result = 0;
+        result = postRepository.updateHits(postId);
+    }
 
 }

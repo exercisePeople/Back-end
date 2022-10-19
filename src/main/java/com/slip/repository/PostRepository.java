@@ -7,7 +7,9 @@ import com.slip.response.PostResponse;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+import javax.transaction.Transactional;
 import java.util.List;
 
 public interface PostRepository extends JpaRepository<Post,Long> {
@@ -17,7 +19,9 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     List<PostResponse> findByUserIdOrderByIdDesc(String userId);
 
+
+    @Transactional
     @Modifying
-    @Query("update Post p set p.hits = p.hits + 1 where p.id = :id")
-    int updateHits(Long id);
+    @Query(value = "update Post set hits = hits + 1 where id = :id",nativeQuery = true)
+    int updateHits(@Param(value = "id") Long id);
 }

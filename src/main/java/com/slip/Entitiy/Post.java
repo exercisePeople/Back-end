@@ -24,24 +24,20 @@ public class Post {
     @Lob
     public String content;
 
-    @Setter
     public int hits;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private User userId;
+    private String userId;
 
 
 
     @Builder
-    public Post(User userId,String title, String content){
+    public Post(String userId,String title, String content){
         this.userId = userId;
         this.title = title;
         this.content = content;
     }
-
-
 
     public void update(PostEditor postEditor) {
         title = postEditor.getTitle();
@@ -53,6 +49,4 @@ public class Post {
                 .title(title)
                 .content(content);
     }
-
-
 }

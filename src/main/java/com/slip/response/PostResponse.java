@@ -4,8 +4,10 @@ import com.slip.Entitiy.Post;
 import com.slip.Entitiy.User;
 import lombok.Builder;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
+@Setter
 public class PostResponse {
 
     /*
@@ -26,14 +28,15 @@ public class PostResponse {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.hits = post.getHits();
-        this.userId = post.getUserId().getNickname();
+        this.userId = post.getUserId();
     }
 
     @Builder
-    public PostResponse(Long id, String title, String content,String userId){
+    public PostResponse(Long id, String title, String content,String userId,int hits){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
         this.content = content;
         this.userId = userId;
+        this.hits = hits;
     }
 }

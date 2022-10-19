@@ -3,6 +3,7 @@ package com.slip.controller;
 import com.slip.Entitiy.Post;
 import com.slip.Entitiy.User;
 import com.slip.repository.CommentRepository;
+import com.slip.repository.PostRepository;
 import com.slip.response.CommentResponse;
 import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
@@ -18,7 +19,11 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.Valid;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
 import java.util.List;
 import java.util.Optional;
 
@@ -30,6 +35,8 @@ public class BoardController {
     private final PostService postService;
 
     private final CommentService commentService;
+
+    private final PostRepository postRepository;
 
     // 연결 성공 조회
     @GetMapping("/")
@@ -48,6 +55,8 @@ public class BoardController {
     //게시글 단건조회
     @GetMapping("/posts/{postId}")
     public PostResponse get(@PathVariable Long postId){
+
+        postService.updateHits(postId);
         return postService.get(postId);
     }
 

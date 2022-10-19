@@ -5,6 +5,7 @@ import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
@@ -20,10 +21,10 @@ public class Grade {
     @Column(name = "grade_avg")
     private float gradeAvg;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @OneToMany(fetch = FetchType.LAZY)
     @JoinColumn(name = "review_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private Review review;
+    private List<Review> reviews;
 
 
     @Builder
