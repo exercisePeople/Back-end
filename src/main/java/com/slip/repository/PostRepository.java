@@ -24,6 +24,6 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     @Transactional
     @Modifying
-    @Query(value = "update Post set hits = hits + 1 where id = :id",nativeQuery = true)
+    @Query(value = "update post set hits = hits + 1 where id = :id",nativeQuery = true)
     int updateHits(@Param(value = "id") Long id);
 }
