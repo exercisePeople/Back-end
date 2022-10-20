@@ -3,7 +3,9 @@ package com.slip.response;
 
 import com.slip.Entitiy.Review;
 import lombok.Builder;
+import lombok.Getter;
 
+@Getter
 public class ReviewResponse {
 
     private Long id;
@@ -14,11 +16,14 @@ public class ReviewResponse {
 
     private String reviewContent;
 
+    private Long facility;
+
     public ReviewResponse(Review review){
         this.id = review.getId();
         this.grade = review.getGrade();
         this.reviewTitle = review.getReviewTitle();
         this.reviewContent = review.getReviewContent();
+        this.facility = review.getFacility().getId();
     }
 
     @Builder

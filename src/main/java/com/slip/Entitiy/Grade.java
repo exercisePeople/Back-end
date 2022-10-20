@@ -28,7 +28,8 @@ public class Grade {
 
 
     @Builder
-    public Grade(float gradeAvg){
+    public Grade(float gradeAvg, List<Review> reviews){
         this.gradeAvg = gradeAvg;
+        this.reviews = reviews;
     }
 }

@@ -20,13 +20,15 @@ public class Facility {
 
     private String tmp;
 
+
+    // 한개의 북마크에 여러개의 시설정보
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "bookmark_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private Bookmark bookmarks;
 
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @OrderBy("id asc") // 댓글 정렬
+    @OrderBy("id asc") // 한개의 시설에 여러개의 리뷰
     private List<Review> reviews;
 
 

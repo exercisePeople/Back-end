@@ -1,11 +1,15 @@
 package com.slip.controller;
 
+import com.slip.response.GradeResponse;
 import com.slip.response.ReviewResponse;
 import com.slip.service.ReviewService;
 import com.slip.vo.ReviewRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
+
+import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -14,13 +18,21 @@ public class ReviewController {
 
     private final ReviewService reviewService;
 
+    //후기 작성
     @PostMapping("/review/{facId}")
-    public void createReview(@PathVariable Long facid,@RequestBody ReviewRequest request){
-        reviewService.createReviews(facid,request);
+    public void createReview(@PathVariable Long facId,@RequestBody @Valid ReviewRequest request){
+        reviewService.createReviews(facId,request);
     }
 
-    @GetMapping("/review/read/{facId}/{revId}")
-    public ReviewResponse readReview(@PathVariable Long revId, @PathVariable Long facId){
-        return reviewService.readReviews(revId,facId);
+    // 후기 조회
+    @GetMapping("/review/read/{facId}")
+    public List<ReviewResponse> readReview(@PathVariable Long facId){
+        return reviewService.readReviews(facId);
+    }
+
+    // 평점 평균 내기
+    @GetMapping("/review/gradeAvg/{facId}")
+    public GradeResponse gradeAvg(@PathVariable Long facId){
+        return reviewService.gradeAvgReslut(facId);
     }
 }

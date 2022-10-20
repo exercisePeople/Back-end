@@ -4,11 +4,14 @@ import com.slip.Entitiy.Facility;
 import com.slip.Entitiy.Review;
 import com.slip.repository.FacilityRepository;
 import com.slip.repository.ReviewRepository;
+import com.slip.response.GradeResponse;
 import com.slip.response.ReviewResponse;
 import com.slip.vo.ReviewRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -38,15 +41,18 @@ public class ReviewService {
     }
 
     // 후기 단건 조회
-    public ReviewResponse readReviews(Long revId, Long facId){
-        Review review = reviewRepository.findById(revId)
-                .orElseThrow(IllegalAccessError::new);
+    public List<ReviewResponse> readReviews(Long id){
+        Facility facility = facilityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("없는 시설입니다."));
 
-        return ReviewResponse.builder()
-                .id(review.getId())
-                .grade(review.getGrade())
-                .reviewTitle(review.getReviewTitle())
-                .reviewContent(review.getReviewContent())
-                .build();
+        return reviewRepository.findReviewByFacilityOrderByIdDesc(facility);
+    }
+
+    //평점 평균내기
+    public GradeResponse gradeAvgReslut(Long id) {
+        Facility facility = facilityRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("없는 시설입니다."));
+
+        return null;
     }
 }
