@@ -7,6 +7,7 @@ import com.slip.editor.PostEditor;
 import com.slip.exception.PostNotFound;
 import com.slip.repository.CommentRepository;
 import com.slip.repository.PostRepository;
+import com.slip.repository.UserRepository;
 import com.slip.response.PostListResponse;
 import com.slip.response.PostResponse;
 import com.slip.vo.CommentRequest;
@@ -28,19 +29,26 @@ public class PostService {
 
     private final PostRepository postRepository;
 
-    private final CommentRepository commentRepository;
-
-    private Long hits;
+    private final UserRepository userRepository;
 
     //게시글 작성
     @Transactional
-    public void write(PostCreate postCreate) {
+    public void write(Long id,PostCreate postCreate) {
+        User user = userRepository.findById(id)
+                .orElseThrow(()-> new IllegalArgumentException("가입되지 않은 계정입니다"));
+
+
+        postCreate.setUserIdx(user);
+
+
         Post post = Post.builder()
-                .userId(postCreate.getUserId())
+                .userIdx(postCreate.getUserIdx())
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
                 .category(postCreate.getCategory())
+                .writer(postCreate.getWriter())
                 .build();
+
        postRepository.save(post);
     }
 
@@ -52,7 +60,7 @@ public class PostService {
 
         return PostResponse.builder()
                 .id(post.getId())
-                .userId(post.getUserId())
+                .userNickname(post.getUserIdx().getNickname())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .hits(post.getHits())
@@ -69,8 +77,8 @@ public class PostService {
 
 
     //게시글 내가 쓴글 조회
-    public List<PostResponse> getUser(String userId){
-        return postRepository.findByUserIdOrderByIdDesc(userId);
+    public List<PostResponse> getUser(Long userIdx){
+        return postRepository.findByUserIdxOrderByIdDesc(userIdx);
     }
 
 

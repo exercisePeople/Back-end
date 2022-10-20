@@ -28,18 +28,22 @@ public class Post {
 
     private String category;
 
+    private String writer;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
-    private String userId;
+    private User userIdx;
 
 
 
     @Builder
-    public Post(String userId,String title, String content, String category){
-        this.userId = userId;
+    public Post(User userIdx,String title, String content, String category,String writer){
+        this.userIdx = userIdx;
         this.title = title;
         this.content = content;
         this.category = category;
+        this.writer = writer;
     }
 
     public void update(PostEditor postEditor) {

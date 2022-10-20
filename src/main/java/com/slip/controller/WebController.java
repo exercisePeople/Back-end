@@ -40,6 +40,6 @@ public class WebController {
         }
 
 
-        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+        return jwtTokenProvider.createToken(member.getUsername(), member.getRoles(), member.getIdx());
     }
 }

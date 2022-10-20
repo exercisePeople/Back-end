@@ -46,9 +46,9 @@ public class BoardController {
 
 
     //게시글 생성
-    @PostMapping("/posts/create")
-    public void post(@RequestBody @Valid PostCreate postCreate){
-        postService.write(postCreate);
+    @PostMapping("/posts/{id}/create")
+    public void post(@PathVariable Long id,@RequestBody @Valid PostCreate postCreate){
+        postService.write(id,postCreate);
     }
 
 
@@ -83,9 +83,9 @@ public class BoardController {
 
 
     // 유저 게시블 조회(내가쓴글 조회)
-    @GetMapping("/posts/user/{userId}")
-    public List<PostResponse> getUser(@PathVariable String userId){
-        return postService.getUser(userId);
+    @GetMapping("/posts/user/{userIdx}")
+    public List<PostResponse> getUser(@PathVariable Long userIdx){
+        return postService.getUser(userIdx);
     }
 
     //카테고리 별 게시판 조회

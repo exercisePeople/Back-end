@@ -27,8 +27,6 @@ public class CommentService {
 
     private final PostRepository postRepository;
 
-    private final UserRepository userRepository;
-
     //댓글 작성하기
     @Transactional
     public void writeComment(Long id,CommentRequest commentRequest) {

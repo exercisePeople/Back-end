@@ -10,23 +10,26 @@ import javax.validation.constraints.NotNull;
 
 
 @Getter
+@Setter
 @NoArgsConstructor
 public class PostCreate {
 
 
     private String title;
     private String content;
-    private String userId;
-
+    private User userIdx;
     private String category;
+
+    private String writer;
 
 
     @Builder
-    public PostCreate(String userId,String title, String content,String category){
-        this.userId = userId;
+    public PostCreate(User userIdx,String title, String content,String category,String writer){
+        this.userIdx = userIdx;
         this.title = title;
         this.content = content;
         this.category = category;
+        this.writer = writer;
     }
 
 

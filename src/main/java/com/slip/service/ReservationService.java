@@ -47,6 +47,7 @@ public class ReservationService {
                 .resTime(request.getResTime())
                 .user(request.getUser())
                 .build();
+
         reservationRepository.save(reservation);
         System.out.println("예약 테이블에 저장성공");
     }
