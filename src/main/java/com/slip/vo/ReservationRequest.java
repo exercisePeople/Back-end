@@ -1,5 +1,6 @@
 package com.slip.vo;
 
+import com.slip.Entitiy.User;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -23,7 +24,11 @@ public class ReservationRequest {
     private int month; // 예약 달
     private int resTime; // 예약 시간
 
-    public ReservationRequest(int peoples,int year,int month, int resTime){
+    private User user;
+
+    @Builder
+    public ReservationRequest(User user,int peoples,int year,int month, int resTime){
+        this.user =user;
         this.peoples = peoples;
         this.year =year;
         this.month=month;

@@ -41,7 +41,8 @@ public class Reservation{
     private User user;
 
     @Builder
-    public Reservation(int peoples,  int year, int month, int resTime) {
+    public Reservation(User user,int peoples,  int year, int month, int resTime) {
+        this.user = user;
         this.peoples = peoples;
         this.year =year;
         this.month = month;

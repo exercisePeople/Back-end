@@ -2,9 +2,11 @@ package com.slip.service;
 
 import com.slip.Entitiy.Post;
 import com.slip.Entitiy.Reservation;
+import com.slip.Entitiy.User;
 import com.slip.editor.PostEditor;
 import com.slip.exception.PostNotFound;
 import com.slip.repository.ReservationRepository;
+import com.slip.repository.UserRepository;
 import com.slip.response.PostResponse;
 import com.slip.response.ReservationResponse;
 import com.slip.vo.PostCreate;
@@ -28,24 +30,34 @@ public class ReservationService {
 
     private final ReservationRepository reservationRepository;
 
+    private final UserRepository userRepository;
+
 
     //예약 작성
-    public void create(ReservationRequest request) {
+    public void create(String userId,ReservationRequest request) {
+        User user = userRepository.findByUserId(userId)
+                .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 유저입니다."));
+
+        request.setUser(user);
+
         Reservation reservation = Reservation.builder()
                 .peoples(request.getPeoples())
                 .year(request.getYear())
                 .month(request.getMonth())
                 .resTime(request.getResTime())
+                .user(request.getUser())
                 .build();
         reservationRepository.save(reservation);
         System.out.println("예약 테이블에 저장성공");
     }
 
+    //예얒 조회 기능
     public ReservationResponse get(Long id){
         Reservation reservation = reservationRepository.findById(id)
                 .orElseThrow(IllegalAccessError::new);
 
         return ReservationResponse.builder()
+                .peoples(reservation.getPeoples())
                 .resId(reservation.getResId())
                 .year(reservation.getYear())
                 .month(reservation.getMonth())

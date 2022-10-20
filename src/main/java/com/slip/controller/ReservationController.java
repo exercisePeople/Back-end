@@ -17,9 +17,9 @@ public class ReservationController {
     private final ReservationService reservationService;
 
     //예약 설정
-    @PostMapping("/reservation/create")
-    public void resCreate(@RequestBody @Valid ReservationRequest reservationRequest){
-        reservationService.create(reservationRequest);
+    @PostMapping("/reservation/{userId}/create")
+    public void resCreate(@PathVariable String userId,@RequestBody @Valid ReservationRequest reservationRequest){
+        reservationService.create(userId,reservationRequest);
     }
 
     //예약 조회
