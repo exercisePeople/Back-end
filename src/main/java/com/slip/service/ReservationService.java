@@ -34,8 +34,8 @@ public class ReservationService {
 
 
     //예약 작성
-    public void create(String userId,ReservationRequest request) {
-        User user = userRepository.findByUserId(userId)
+    public void create(Long id,ReservationRequest request) {
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 유저입니다."));
 
         request.setUser(user);
@@ -65,13 +65,4 @@ public class ReservationService {
                 .resTime(reservation.getResTime())
                 .build();
     }
-
-
-
-
-
-
-
-
-
 }

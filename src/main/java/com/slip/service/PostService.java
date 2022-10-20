@@ -64,6 +64,7 @@ public class PostService {
                 .content(post.getContent())
                 .hits(post.getHits())
                 .category(post.getCategory())
+                .writer(post.getWriter())
                 .build();
     }
 

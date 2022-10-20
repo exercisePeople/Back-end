@@ -33,6 +33,4 @@ public class CommentResponse {
         this.writer = writer;
         this.user = user;
     }
-
-
 }

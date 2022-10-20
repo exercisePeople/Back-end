@@ -17,6 +17,7 @@ public class Review {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "grade")
     private int grade;
 
     @Column(name = "review_title")
@@ -33,7 +34,8 @@ public class Review {
 
 
     @Builder
-    public Review(int grade, String reviewTitle, String reviewContent){
+    public Review(Facility facility,int grade, String reviewTitle, String reviewContent){
+        this.facility =facility;
         this.grade = grade;
         this.reviewTitle = reviewTitle;
         this.reviewContent = reviewContent;
