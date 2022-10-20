@@ -60,7 +60,6 @@ public class PostService {
 
         return PostResponse.builder()
                 .id(post.getId())
-                .userNickname(post.getUserIdx().getNickname())
                 .title(post.getTitle())
                 .content(post.getContent())
                 .hits(post.getHits())

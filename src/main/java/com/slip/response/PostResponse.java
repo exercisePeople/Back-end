@@ -18,8 +18,6 @@ public class PostResponse {
     private String title;
     private String content;
 
-    private String userNickname;
-
     private int hits;
 
     private String category;
@@ -32,17 +30,15 @@ public class PostResponse {
         this.title = post.getTitle();
         this.content = post.getContent();
         this.hits = post.getHits();
-        this.userNickname = post.getUserIdx().getNickname();
         this.category = post.getCategory();
         this.writer = post.getWriter();
     }
 
     @Builder
-    public PostResponse(Long id, String title, String content,String userNickname,int hits,String category,String writer){
+    public PostResponse(Long id, String title, String content,int hits,String category,String writer){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
         this.content = content;
-        this.userNickname = userNickname;
         this.hits = hits;
         this.category = category;
         this.writer = writer;
