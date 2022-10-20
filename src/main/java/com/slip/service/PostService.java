@@ -39,6 +39,7 @@ public class PostService {
                 .userId(postCreate.getUserId())
                 .title(postCreate.getTitle())
                 .content(postCreate.getContent())
+                .category(postCreate.getCategory())
                 .build();
        postRepository.save(post);
     }
@@ -55,6 +56,7 @@ public class PostService {
                 .title(post.getTitle())
                 .content(post.getContent())
                 .hits(post.getHits())
+                .category(post.getCategory())
                 .build();
     }
 
@@ -105,4 +107,8 @@ public class PostService {
         result = postRepository.updateHits(postId);
     }
 
+    //게시글 카테고리별 조회
+    public List<PostListResponse> getCategory(String category) {
+        return postRepository.findByCategoryOrderByIdDesc(category);
+    }
 }

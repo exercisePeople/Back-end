@@ -88,6 +88,12 @@ public class BoardController {
         return postService.getUser(userId);
     }
 
+    //카테고리 별 게시판 조회
+    @GetMapping("/posts/category/{category}")
+    public List<PostListResponse> getCategory(@PathVariable String category){
+        return postService.getCategory(category);
+    }
+
 
     //게시글 댓글
     @PostMapping("/posts/{id}/comment/write")

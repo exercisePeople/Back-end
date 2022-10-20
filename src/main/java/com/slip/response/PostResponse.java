@@ -22,6 +22,8 @@ public class PostResponse {
 
     private int hits;
 
+    private String category;
+
     //오버로딩
     public PostResponse(Post post){
         this.id = post.getId();
@@ -29,14 +31,16 @@ public class PostResponse {
         this.content = post.getContent();
         this.hits = post.getHits();
         this.userId = post.getUserId();
+        this.category = post.getCategory();
     }
 
     @Builder
-    public PostResponse(Long id, String title, String content,String userId,int hits){
+    public PostResponse(Long id, String title, String content,String userId,int hits,String category){
         this.id = id;
         this.title =title.substring(0,Math.min(title.length(),10));  // 제목의 길이가 길면 최대 길이를 10자로 끊어준다 (필수는 아님)
         this.content = content;
         this.userId = userId;
         this.hits = hits;
+        this.category = category;
     }
 }

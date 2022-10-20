@@ -18,13 +18,15 @@ public class PostCreate {
     private String content;
     private String userId;
 
+    private String category;
 
 
     @Builder
-    public PostCreate(String userId,String title, String content){
+    public PostCreate(String userId,String title, String content,String category){
         this.userId = userId;
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 
 

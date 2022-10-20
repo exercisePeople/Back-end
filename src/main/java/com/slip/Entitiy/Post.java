@@ -26,6 +26,8 @@ public class Post {
 
     public int hits;
 
+    private String category;
+
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private String userId;
@@ -33,10 +35,11 @@ public class Post {
 
 
     @Builder
-    public Post(String userId,String title, String content){
+    public Post(String userId,String title, String content, String category){
         this.userId = userId;
         this.title = title;
         this.content = content;
+        this.category = category;
     }
 
     public void update(PostEditor postEditor) {

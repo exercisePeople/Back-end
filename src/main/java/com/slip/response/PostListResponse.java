@@ -3,4 +3,6 @@ public interface PostListResponse {
     Long getId();
     String getTitle();
     String getUserId();
+    String getCategory();
+    int getHits();
 }

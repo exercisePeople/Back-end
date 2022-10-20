@@ -19,6 +19,8 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     List<PostResponse> findByUserIdOrderByIdDesc(String userId);
 
+    List<PostListResponse> findByCategoryOrderByIdDesc(String category);
+
 
     @Transactional
     @Modifying
