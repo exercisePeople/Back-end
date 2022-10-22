@@ -19,21 +19,23 @@ public class Bookmark {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String tmp;
+    @Column(name = "bookmark_name")
+    private String bookmarkName;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-
-
-    @OneToOne(mappedBy = "bookmarks", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    private Facility facilities;
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "facility_id")
+    private Facility facility;
 
 
     @Builder
-    public Bookmark(String tmp){
-        this.tmp = tmp;
+    public Bookmark(Facility facility,User user, String bookmarkName){
+        this.user = user;
+        this.facility = facility;
+       this.bookmarkName = bookmarkName;
     }
 }

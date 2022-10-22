@@ -27,16 +27,13 @@ public class Facility {
     @Column(name = "grade_avg")
     private float gradeAvg;
 
-
-    // 한개의 북마크에 여러개의 시설정보
-    @OneToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "bookmark_id")
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    private Bookmark bookmarks;
-
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 한개의 시설에 여러개의 리뷰
     private List<Review> reviews;
+
+    @OneToOne(mappedBy = "facility", fetch = FetchType.LAZY)
+    private Bookmark bookmark;
+
 
     @Builder
     public Facility(String facilityName,String facilityLocation, float gradeAvg){
