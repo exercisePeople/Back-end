@@ -110,7 +110,7 @@ public class PostService {
     }
 
     //게시글 조회수 증가
-    public void updateHits(Long postId){
+    public void  updateHits(Long postId){
         int result = 0;
         result = postRepository.updateHits(postId);
     }

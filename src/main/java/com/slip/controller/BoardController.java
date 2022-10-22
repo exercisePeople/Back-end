@@ -55,7 +55,6 @@ public class BoardController {
     //게시글 단건조회
     @GetMapping("/posts/{postId}")
     public PostResponse get(@PathVariable Long postId){
-
         postService.updateHits(postId);
         return postService.get(postId);
     }

@@ -4,7 +4,6 @@ import com.slip.Entitiy.Facility;
 import com.slip.Entitiy.Review;
 import com.slip.repository.FacilityRepository;
 import com.slip.repository.ReviewRepository;
-import com.slip.response.GradeResponse;
 import com.slip.response.ReviewResponse;
 import com.slip.vo.ReviewRequest;
 import lombok.RequiredArgsConstructor;
@@ -48,11 +47,5 @@ public class ReviewService {
         return reviewRepository.findReviewByFacilityOrderByIdDesc(facility);
     }
 
-    //평점 평균내기
-    public GradeResponse gradeAvgReslut(Long id) {
-        Facility facility = facilityRepository.findById(id)
-                .orElseThrow(() -> new IllegalArgumentException("없는 시설입니다."));
 
-        return null;
-    }
 }

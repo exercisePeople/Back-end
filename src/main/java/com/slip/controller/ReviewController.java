@@ -1,6 +1,5 @@
 package com.slip.controller;
 
-import com.slip.response.GradeResponse;
 import com.slip.response.ReviewResponse;
 import com.slip.service.ReviewService;
 import com.slip.vo.ReviewRequest;
@@ -30,9 +29,5 @@ public class ReviewController {
         return reviewService.readReviews(facId);
     }
 
-    // 평점 평균 내기
-    @GetMapping("/review/gradeAvg/{facId}")
-    public GradeResponse gradeAvg(@PathVariable Long facId){
-        return reviewService.gradeAvgReslut(facId);
-    }
 }
+

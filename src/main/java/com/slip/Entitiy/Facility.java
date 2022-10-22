@@ -18,7 +18,14 @@ public class Facility {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String tmp;
+    @Column(name = "facility_name")
+    private String facilityName;
+
+    @Column(name = "facility_location")
+    private String facilityLocation;
+
+    @Column(name = "grade_avg")
+    private float gradeAvg;
 
 
     // 한개의 북마크에 여러개의 시설정보
@@ -31,9 +38,10 @@ public class Facility {
     @OrderBy("id asc") // 한개의 시설에 여러개의 리뷰
     private List<Review> reviews;
 
-
     @Builder
-    public Facility(String tmp){
-        this.tmp = tmp;
+    public Facility(String facilityName,String facilityLocation, float gradeAvg){
+        this.gradeAvg = gradeAvg;
+        this.facilityName = facilityName;
+        this.facilityLocation = facilityLocation;
     }
 }
