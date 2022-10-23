@@ -18,12 +18,13 @@ public class FacilityController {
     private final FacilityService facilityService;
     private final ReviewService reviewService;
 
+    // 시설정보 추가
     @PostMapping("/facility/create")
     public void facCreate(@RequestBody @Valid FacilityRequest facilityRequest){
         facilityService.createFacility(facilityRequest);
     }
 
-
+    // 시설정보 조회
     @GetMapping("/facility{facId}")
     public FacilityResponse getFacility(@PathVariable Long facId){
         return facilityService.getOne(facId);
