@@ -17,6 +17,7 @@ public class FacilityResponse {
 
     private float gradeAvg;
 
+    private int facilityTel;
 
     //오버 로딩
     public FacilityResponse(Facility facility){
@@ -24,13 +25,15 @@ public class FacilityResponse {
         this.facilityName = facility.getFacilityName();
         this.facilityLocation = facility.getFacilityLocation();
         this.gradeAvg = facility.getGradeAvg();
+        this.facilityTel = facility.getFacilityTel();
     }
 
     @Builder
-    public FacilityResponse(Long id, String facilityName, String facilityLocation, float gradeAvg){
+    public FacilityResponse(Long id, String facilityName, String facilityLocation, float gradeAvg, int facilityTel){
         this.id =id;
         this.facilityName = facilityName;
         this.facilityLocation = facilityLocation;
         this.gradeAvg =gradeAvg;
+        this.facilityTel = facilityTel;
     }
 }

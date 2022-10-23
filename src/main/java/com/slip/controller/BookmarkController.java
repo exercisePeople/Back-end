@@ -17,12 +17,14 @@ public class BookmarkController {
 
     private final BookmarkService bookmarkService;
 
+    // 북마크 등록
     @PostMapping("/bookmark/{userId}/{facId}")
     public void bookmarkCreate(@PathVariable Long userId,@PathVariable Long facId, @RequestBody @Valid BookmarkRequest bookmarkRequest){
         bookmarkService.bookmarkPost(userId,facId,bookmarkRequest);
     }
 
-    @GetMapping("/bookmark/read{userId}")
+    // 북마크 조회
+    @GetMapping("/bookmark/read/{userId}")
     public List<BookmarkResponse> getBookmark(@PathVariable Long userId){
         return bookmarkService.findBookmark(userId);
     }

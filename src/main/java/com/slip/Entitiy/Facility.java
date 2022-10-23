@@ -27,6 +27,9 @@ public class Facility {
     @Column(name = "grade_avg")
     private float gradeAvg;
 
+    @Column(name = "facility_tel")
+    private Integer facilityTel;
+
     @OneToMany(mappedBy = "facility", fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
     @OrderBy("id asc") // 한개의 시설에 여러개의 리뷰
     private List<Review> reviews;
@@ -34,11 +37,15 @@ public class Facility {
     @OneToOne(mappedBy = "facility", fetch = FetchType.LAZY)
     private Bookmark bookmark;
 
+    @OneToOne(mappedBy = "facility", fetch = FetchType.LAZY)
+    private Reservation reservation;
+
 
     @Builder
-    public Facility(String facilityName,String facilityLocation, float gradeAvg){
+    public Facility(String facilityName,String facilityLocation, float gradeAvg, Integer facilityTel){
         this.gradeAvg = gradeAvg;
         this.facilityName = facilityName;
         this.facilityLocation = facilityLocation;
+        this.facilityTel = facilityTel;
     }
 }

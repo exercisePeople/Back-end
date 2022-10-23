@@ -37,8 +37,10 @@ public class PostService {
         User user = userRepository.findById(id)
                 .orElseThrow(()-> new IllegalArgumentException("가입되지 않은 계정입니다"));
 
+        String userNickname = userRepository.selectUserNickname(id);
 
         postCreate.setUserIdx(user);
+        postCreate.setWriter(userNickname);
 
 
         Post post = Post.builder()

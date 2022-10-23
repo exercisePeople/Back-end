@@ -35,18 +35,33 @@ public class Reservation{
     @Column(name = "create_at")
     private LocalDateTime createAt;
 
+    @Column(name = "res_name")
+    private String resName;
+
+    @Column(name = "res_location")
+    private String resLocation;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
+    @JoinColumn(name = "facility_id")
+    private Facility facility;
+
+
+
     @Builder
-    public Reservation(User user,int peoples,  int year, int month, int resTime) {
+    public Reservation(User user,int peoples,  int year, int month, int resTime, Facility facility, String resName, String resLocation) {
         this.user = user;
         this.peoples = peoples;
         this.year =year;
         this.month = month;
         this.resTime = resTime;
+        this.facility = facility;
+        this.resName =resName;
+        this.resLocation = resLocation;
     }
 
     @PrePersist // 데이터 생성이 이루어질때 사전 작업

@@ -19,6 +19,10 @@ public class ReservationResponse {
     private final int month;
     private final int resTime;
 
+    private final String resName;
+
+    private final String resLocation;
+
     //오버로딩
     public ReservationResponse(Reservation reservation){
         this.resId = reservation.getResId();
@@ -26,14 +30,18 @@ public class ReservationResponse {
         this.year =reservation.getYear();
         this.month = reservation.getMonth();
         this.resTime = reservation.getResTime();
+        this.resName = reservation.getFacility().getFacilityName();
+        this.resLocation = reservation.getFacility().getFacilityLocation();
     }
 
     @Builder
-    public ReservationResponse(Long resId, int peoples, int year,int month, int resTime){
+    public ReservationResponse(Long resId, int peoples, int year,int month, int resTime, String resName, String resLocation){
         this.resId = resId;
         this.peoples = peoples;
         this.year = year;
         this.month = month;
         this.resTime = resTime;
+        this.resName = resName;
+        this.resLocation = resLocation;
     }
 }

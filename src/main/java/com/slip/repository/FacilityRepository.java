@@ -16,4 +16,8 @@ public interface FacilityRepository extends JpaRepository<Facility,Long> {
     @Query(value = "select facility_name from facility where id = :id",nativeQuery = true)
     String selectFacilityName(Long id);
 
+    @Transactional
+    @Query(value = "select facility_location from facility where id = :id",nativeQuery = true)
+    String selectFacilityLocation(Long id);
+
 }

@@ -22,6 +22,7 @@ public class FacilityService {
         Facility facility = Facility.builder()
                 .facilityName(facilityRequest.getFacilityName())
                 .facilityLocation(facilityRequest.getFacilityLocation())
+                .facilityTel(facilityRequest.getFacilityTel())
                 .build();
 
         facilityRepository.save(facility);
@@ -37,6 +38,7 @@ public class FacilityService {
                 .facilityName(facility.getFacilityName())
                 .facilityLocation(facility.getFacilityLocation())
                 .gradeAvg(facility.getGradeAvg())
+                .facilityTel(facility.getFacilityTel())
                 .build();
     }
 

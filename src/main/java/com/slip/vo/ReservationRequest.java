@@ -1,5 +1,6 @@
 package com.slip.vo;
 
+import com.slip.Entitiy.Facility;
 import com.slip.Entitiy.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -26,12 +27,21 @@ public class ReservationRequest {
 
     private User user;
 
+    private Facility facility;
+
+    private String resName;
+
+    private String resLocation;
+
     @Builder
-    public ReservationRequest(User user,int peoples,int year,int month, int resTime){
+    public ReservationRequest(User user,int peoples,int year,int month, int resTime, Facility facility,String resName, String resLocation){
         this.user =user;
         this.peoples = peoples;
         this.year =year;
         this.month=month;
         this.resTime = resTime;
+        this.facility = facility;
+        this.resName = resName;
+        this.resLocation = resLocation;
     }
 }
