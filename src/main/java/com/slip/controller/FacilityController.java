@@ -25,7 +25,7 @@ public class FacilityController {
     }
 
     // 시설정보 조회
-    @GetMapping("/facility{facId}")
+    @GetMapping("/facility/{facId}")
     public FacilityResponse getFacility(@PathVariable Long facId){
         return facilityService.getOne(facId);
     }

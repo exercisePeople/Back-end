@@ -80,6 +80,8 @@ public class ReservationService {
                 .year(reservation.getYear())
                 .month(reservation.getMonth())
                 .resTime(reservation.getResTime())
+                .resName(reservation.getResName())
+                .resLocation(reservation.getResLocation())
                 .build();
     }
 }
