@@ -4,11 +4,14 @@ import com.slip.Entitiy.Facility;
 import com.slip.Entitiy.Review;
 import com.slip.repository.FacilityRepository;
 import com.slip.repository.ReviewRepository;
+import com.slip.response.FacilityListResponse;
 import com.slip.response.FacilityResponse;
 import com.slip.vo.FacilityRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Slf4j
 @Service
@@ -43,4 +46,7 @@ public class FacilityService {
     }
 
 
+    public List<FacilityListResponse> getAllFacility() {
+        return facilityRepository.findAllByOrderByGradeAvg();
+    }
 }

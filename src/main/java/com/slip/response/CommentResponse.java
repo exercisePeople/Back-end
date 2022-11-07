@@ -14,23 +14,17 @@ public class CommentResponse {
     private String writer;
     private String comment;
 
-    private Long post;
-
-    private String user;
 
     public CommentResponse(Comment comment){
         this.id = comment.getId();
         this.comment = comment.getComment();
         this.writer = comment.getWriter();
-        this.post = comment.getPosts().getId();
-        this.user = comment.getUser().getNickname();
     }
 
     @Builder
-    public CommentResponse(Long id, String writer, String comment, String user){
+    public CommentResponse(Long id, String writer, String comment){
         this.id = id;
         this.comment =comment;
         this.writer = writer;
-        this.user = user;
     }
 }

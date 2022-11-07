@@ -23,8 +23,11 @@ public class CommentRequest {
 
     private Post posts;
 
+    private User user;
+
     @Builder
-    public CommentRequest(Post posts,String comment,String writer){
+    public CommentRequest(User user,Post posts,String comment,String writer){
+        this.user = user;
         this.posts = posts;
         this.comment = comment;
         this.writer = writer;

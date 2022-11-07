@@ -27,17 +27,26 @@ public class CommentService {
 
     private final PostRepository postRepository;
 
+    private final UserRepository userRepository;
+
     //댓글 작성하기
     @Transactional
-    public void writeComment(Long id,CommentRequest commentRequest) {
+    public void writeComment(Long id,Long userId,CommentRequest commentRequest) {
 
         Post post = postRepository.findById(id)
                         .orElseThrow(()->
                                 new IllegalArgumentException("댓글 쓰기 실패 : 해당 게시글 존재 x"));
+        User user = userRepository.findById(userId)
+                .orElseThrow(()-> new IllegalArgumentException("가입되지 않은 유저입니다."));
 
+        String userNickname = userRepository.selectUserNickname(userId);
+
+        commentRequest.setUser(user);
         commentRequest.setPosts(post);
+        commentRequest.setWriter(userNickname);
 
         Comment comment = Comment.builder()
+                .user(commentRequest.getUser())
                 .posts(commentRequest.getPosts())
                 .comment(commentRequest.getComment())
                 .writer(commentRequest.getWriter())

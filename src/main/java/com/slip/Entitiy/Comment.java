@@ -39,7 +39,8 @@ public class Comment {
     private Post posts;
 
     @Builder
-    public Comment(Post posts,String comment, String writer){
+    public Comment(User user,Post posts,String comment, String writer){
+        this.user = user;
         this.posts = posts;
         this.comment = comment;
         this.writer = writer;

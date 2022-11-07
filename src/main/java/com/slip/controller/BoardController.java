@@ -95,9 +95,9 @@ public class BoardController {
 
 
     //게시글 댓글
-    @PostMapping("/posts/{id}/comment/write")
-    public void commentSave(@PathVariable Long id,@RequestBody CommentRequest commentRequest){
-        commentService.writeComment(id,commentRequest);
+    @PostMapping("/posts/{id}/{userId}/comment/write")
+    public void commentSave(@PathVariable Long id,@PathVariable Long userId,@RequestBody CommentRequest commentRequest){
+        commentService.writeComment(id,userId,commentRequest);
     }
 
     //게시글 댓글 조회하기

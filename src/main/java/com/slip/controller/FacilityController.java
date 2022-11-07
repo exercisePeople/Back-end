@@ -1,5 +1,6 @@
 package com.slip.controller;
 
+import com.slip.response.FacilityListResponse;
 import com.slip.response.FacilityResponse;
 import com.slip.service.FacilityService;
 import com.slip.service.ReviewService;
@@ -9,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -28,5 +30,11 @@ public class FacilityController {
     @GetMapping("/facility/{facId}")
     public FacilityResponse getFacility(@PathVariable Long facId){
         return facilityService.getOne(facId);
+    }
+
+    // 시설정보 전체 조회
+    @GetMapping("/facility")
+    public List<FacilityListResponse> getAllFacility(){
+        return facilityService.getAllFacility();
     }
 }
