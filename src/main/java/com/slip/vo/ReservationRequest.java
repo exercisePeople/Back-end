@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 @Setter
 public class ReservationRequest {
 
+    private Long facilityId;
+
     private int peoples; //인원수
 
     @Min(value = 2022,message = "연도가 2022년보다 작습니다")
@@ -27,20 +29,18 @@ public class ReservationRequest {
 
     private User user;
 
-    private Facility facility;
-
     private String resName;
 
     private String resLocation;
 
     @Builder
-    public ReservationRequest(User user,int peoples,int year,int month, int resTime, Facility facility,String resName, String resLocation){
+    public ReservationRequest(User user,int peoples,int year,int month, int resTime, Long facilityId,String resName, String resLocation){
         this.user =user;
         this.peoples = peoples;
         this.year =year;
         this.month=month;
         this.resTime = resTime;
-        this.facility = facility;
+        this.facilityId = facilityId;
         this.resName = resName;
         this.resLocation = resLocation;
     }

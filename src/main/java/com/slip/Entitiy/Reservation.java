@@ -20,6 +20,9 @@ public class Reservation{
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long resId;
 
+    @Column(name = "facility_id")
+    private Long facilityId;
+
     @Column(name = "peoples")
     private int peoples;
 
@@ -46,20 +49,17 @@ public class Reservation{
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User user;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.REMOVE)
-    @JoinColumn(name = "facility_id")
-    private Facility facility;
 
 
 
     @Builder
-    public Reservation(User user,int peoples,  int year, int month, int resTime, Facility facility, String resName, String resLocation) {
+    public Reservation(User user,int peoples,  int year, int month, int resTime, Long facilityId, String resName, String resLocation) {
         this.user = user;
         this.peoples = peoples;
         this.year =year;
         this.month = month;
         this.resTime = resTime;
-        this.facility = facility;
+        this.facilityId =facilityId;
         this.resName =resName;
         this.resLocation = resLocation;
     }

@@ -38,20 +38,11 @@ public class ReservationService {
 
 
     //예약 작성
-    public void create(Long id,Long facId,ReservationRequest request) {
+    public void create(Long id,ReservationRequest request) {
         User user = userRepository.findById(id)
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 유저입니다."));
 
-        Facility facility = facilityRepository.findById(facId)
-                .orElseThrow(()-> new IllegalArgumentException("등록되지 않은 시설입니다."));
-
-        String facilityName = facilityRepository.selectFacilityName(facId);
-        String facilityLocation = facilityRepository.selectFacilityLocation(facId);
-
-        request.setResName(facilityName);
-        request.setResLocation(facilityLocation);
         request.setUser(user);
-        request.setFacility(facility);
 
 
         Reservation reservation = Reservation.builder()
@@ -62,11 +53,10 @@ public class ReservationService {
                 .user(request.getUser())
                 .resName(request.getResName())
                 .resLocation(request.getResLocation())
-                .facility(request.getFacility())
+                .facilityId(request.getFacilityId())
                 .build();
 
         reservationRepository.save(reservation);
-        System.out.println("예약 테이블에 저장성공");
     }
 
     //예얒 조회 기능

@@ -30,8 +30,8 @@ public class ReservationResponse {
         this.year =reservation.getYear();
         this.month = reservation.getMonth();
         this.resTime = reservation.getResTime();
-        this.resName = reservation.getFacility().getFacilityName();
-        this.resLocation = reservation.getFacility().getFacilityLocation();
+        this.resName = reservation.getResName();
+        this.resLocation = reservation.getResLocation();
     }
 
     @Builder
