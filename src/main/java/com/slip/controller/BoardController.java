@@ -105,4 +105,10 @@ public class BoardController {
     public List<CommentResponse> getAllComment(@PathVariable Long id){
         return commentService.findComment(id);
     }
+
+    //게시판 공지글 조회
+    @GetMapping("/posts/notice/{noticeNum}")
+    public List<PostListResponse> getNotice(@PathVariable Long noticeNum){
+        return postService.getNotice(noticeNum);
+    }
 }

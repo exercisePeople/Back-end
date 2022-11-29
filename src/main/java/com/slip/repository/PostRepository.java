@@ -21,6 +21,7 @@ public interface PostRepository extends JpaRepository<Post,Long> {
 
     List<PostListResponse> findByCategoryOrderByIdDesc(String category);
 
+    List<PostListResponse> findByNoticeOrderByIdDesc(Long notice);
 
     @Transactional
     @Modifying

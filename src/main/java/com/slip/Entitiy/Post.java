@@ -30,6 +30,8 @@ public class Post {
 
     private String writer;
 
+    private Long notice;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_idx")
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -38,12 +40,13 @@ public class Post {
 
 
     @Builder
-    public Post(User userIdx,String title, String content, String category,String writer){
+    public Post(User userIdx,String title, String content, String category,String writer, Long notice){
         this.userIdx = userIdx;
         this.title = title;
         this.content = content;
         this.category = category;
         this.writer = writer;
+        this.notice = notice;
     }
 
     public void update(PostEditor postEditor) {

@@ -40,8 +40,8 @@ public class User implements UserDetails{
     @Builder.Default
     private List<String> roles = new ArrayList<>();
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
-    private List<Bookmark> bookmarks;
+//    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.REMOVE)
+//    private List<Bookmark> bookmarks;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {

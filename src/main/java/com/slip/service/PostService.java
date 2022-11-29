@@ -49,6 +49,7 @@ public class PostService {
                 .content(postCreate.getContent())
                 .category(postCreate.getCategory())
                 .writer(postCreate.getWriter())
+                .notice(postCreate.getNotice())
                 .build();
 
        postRepository.save(post);
@@ -69,7 +70,6 @@ public class PostService {
                 .writer(post.getWriter())
                 .build();
     }
-
 
     //게시글 전체 조회
     @Transactional
@@ -120,5 +120,10 @@ public class PostService {
     //게시글 카테고리별 조회
     public List<PostListResponse> getCategory(String category) {
         return postRepository.findByCategoryOrderByIdDesc(category);
+    }
+
+    //게시글 공지글 조회
+    public List<PostListResponse> getNotice(Long notice){
+        return postRepository.findByNoticeOrderByIdDesc(notice);
     }
 }

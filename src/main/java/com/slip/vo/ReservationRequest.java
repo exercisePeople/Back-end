@@ -1,6 +1,6 @@
 package com.slip.vo;
 
-import com.slip.Entitiy.Facility;
+
 import com.slip.Entitiy.User;
 import lombok.Builder;
 import lombok.Getter;
@@ -8,8 +8,7 @@ import lombok.Setter;
 
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
+
 
 @Getter
 @Setter

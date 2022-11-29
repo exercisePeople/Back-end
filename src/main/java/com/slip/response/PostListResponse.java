@@ -6,4 +6,5 @@ public interface PostListResponse {
     String getWriter();
     String getCategory();
     int getHits();
+    Integer getNotice();
 }
