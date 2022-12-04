@@ -37,8 +37,6 @@ public class Post {
     @OnDelete(action = OnDeleteAction.CASCADE)
     private User userIdx;
 
-
-
     @Builder
     public Post(User userIdx,String title, String content, String category,String writer, Long notice){
         this.userIdx = userIdx;
