@@ -8,6 +8,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -23,8 +24,8 @@ public class ReservationController {
     }
 
     //예약 조회
-    @GetMapping("/reservation/{resId}")
-    public ReservationResponse get(@PathVariable Long resId){
-        return reservationService.get(resId);
+    @GetMapping("/reservation/{facilityId}")
+    public List<ReservationResponse> get(@PathVariable Long facilityId){
+        return reservationService.get(facilityId);
     }
 }

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Slf4j
 @Service
 @RequiredArgsConstructor
@@ -39,15 +41,7 @@ public class ReservationService {
     }
 
     //예얒 조회 기능
-    public ReservationResponse get(Long id){
-        Reservation reservation = reservationRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new);
-
-        return ReservationResponse.builder()
-                .resId(reservation.getResId())
-                .facilityId(reservation.getFacilityId())
-                .resName(reservation.getResName())
-                .resLocation(reservation.getResLocation())
-                .build();
+    public List<ReservationResponse> get(Long id){
+        return reservationRepository.findAllByFacilityId(id);
     }
 }
