@@ -16,7 +16,7 @@ public class PostEdit {
     private String content;
 
     @Builder
-    public PostEdit(String title,String content){
+    public PostEdit(String title, String content) {
         this.title = title;
         this.content = content;
     }

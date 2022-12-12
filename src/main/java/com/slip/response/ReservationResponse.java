@@ -4,9 +4,6 @@ import com.slip.Entitiy.Reservation;
 import lombok.Builder;
 import lombok.Getter;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
-
 @Getter
 public class ReservationResponse {
     /*
@@ -14,10 +11,8 @@ public class ReservationResponse {
      *
      * */
     private final Long resId;
-    private final int peoples;
-    private final int year;
-    private final int month;
-    private final int resTime;
+
+    private final Long facilityId;
 
     private final String resName;
 
@@ -26,21 +21,15 @@ public class ReservationResponse {
     //오버로딩
     public ReservationResponse(Reservation reservation){
         this.resId = reservation.getResId();
-        this.peoples = reservation.getPeoples();
-        this.year =reservation.getYear();
-        this.month = reservation.getMonth();
-        this.resTime = reservation.getResTime();
+        this.facilityId = reservation.getFacilityId();
         this.resName = reservation.getResName();
         this.resLocation = reservation.getResLocation();
     }
 
     @Builder
-    public ReservationResponse(Long resId, int peoples, int year,int month, int resTime, String resName, String resLocation){
+    public ReservationResponse(Long resId,Long facilityId ,String resName, String resLocation){
         this.resId = resId;
-        this.peoples = peoples;
-        this.year = year;
-        this.month = month;
-        this.resTime = resTime;
+        this.facilityId = facilityId;
         this.resName = resName;
         this.resLocation = resLocation;
     }

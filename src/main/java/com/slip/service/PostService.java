@@ -33,9 +33,8 @@ public class PostService {
 
     //게시글 작성
     @Transactional
-    public void write(Long id,PostCreate postCreate) {
-        User user = userRepository.findById(id)
-                .orElseThrow(()-> new IllegalArgumentException("가입되지 않은 계정입니다"));
+    public void write(Long id, PostCreate postCreate) {
+        User user = userRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("가입되지 않은 계정입니다"));
 
         String userNickname = userRepository.selectUserNickname(id);
 
@@ -43,32 +42,17 @@ public class PostService {
         postCreate.setWriter(userNickname);
 
 
-        Post post = Post.builder()
-                .userIdx(postCreate.getUserIdx())
-                .title(postCreate.getTitle())
-                .content(postCreate.getContent())
-                .category(postCreate.getCategory())
-                .writer(postCreate.getWriter())
-                .notice(postCreate.getNotice())
-                .build();
+        Post post = Post.builder().userIdx(postCreate.getUserIdx()).title(postCreate.getTitle()).content(postCreate.getContent()).category(postCreate.getCategory()).writer(postCreate.getWriter()).notice(postCreate.getNotice()).build();
 
-       postRepository.save(post);
+        postRepository.save(post);
     }
 
 
     //게시글 단건 조회
-    public PostResponse get(Long id){
-        Post post = postRepository.findById(id)
-                .orElseThrow(IllegalAccessError::new);
+    public PostResponse get(Long id) {
+        Post post = postRepository.findById(id).orElseThrow(IllegalAccessError::new);
 
-        return PostResponse.builder()
-                .id(post.getId())
-                .title(post.getTitle())
-                .content(post.getContent())
-                .hits(post.getHits())
-                .category(post.getCategory())
-                .writer(post.getWriter())
-                .build();
+        return PostResponse.builder().id(post.getId()).title(post.getTitle()).content(post.getContent()).hits(post.getHits()).category(post.getCategory()).writer(post.getWriter()).build();
     }
 
     //게시글 전체 조회
@@ -79,7 +63,7 @@ public class PostService {
 
 
     //게시글 내가 쓴글 조회
-    public List<PostResponse> getUser(Long userIdx){
+    public List<PostResponse> getUser(Long userIdx) {
         return postRepository.findByUserIdxOrderByIdDesc(userIdx);
     }
 
@@ -87,15 +71,11 @@ public class PostService {
     //게시글 수정
     @Transactional
     public void update(Long id, PostEdit postEdit) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(RuntimeException::new);
+        Post post = postRepository.findById(id).orElseThrow(RuntimeException::new);
 
         PostEditor.PostEditorBuilder postEditorBuilder = post.toEditor();
 
-        PostEditor postEditor = postEditorBuilder
-                .title(postEdit.getTitle())
-                .content(postEdit.getContent())
-                .build();
+        PostEditor postEditor = postEditorBuilder.title(postEdit.getTitle()).content(postEdit.getContent()).build();
 
         post.update(postEditor);
         System.out.println("게시글 수정 완료");
@@ -104,15 +84,14 @@ public class PostService {
 
     //게시글 삭제
     public void delete(Long id) {
-        Post post = postRepository.findById(id)
-                .orElseThrow(PostNotFound::new);
+        Post post = postRepository.findById(id).orElseThrow(PostNotFound::new);
 
         postRepository.delete(post);
         System.out.println("게시글 삭제 완료");
     }
 
     //게시글 조회수 증가
-    public void  updateHits(Long postId){
+    public void updateHits(Long postId) {
         int result = 0;
         result = postRepository.updateHits(postId);
     }
@@ -123,7 +102,7 @@ public class PostService {
     }
 
     //게시글 공지글 조회
-    public List<PostListResponse> getNotice(Long notice){
+    public List<PostListResponse> getNotice(Long notice) {
         return postRepository.findByNoticeOrderByIdDesc(notice);
     }
 }
