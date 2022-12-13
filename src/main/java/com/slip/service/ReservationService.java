@@ -44,4 +44,11 @@ public class ReservationService {
     public List<ReservationResponse> get(Long id){
         return reservationRepository.findAllByFacilityId(id);
     }
+
+    //내가 한 예약 조회
+    public List<ReservationResponse> getUser(User userId){
+
+
+        return reservationRepository.findByUserOrderByResIdDesc(userId);
+    }
 }

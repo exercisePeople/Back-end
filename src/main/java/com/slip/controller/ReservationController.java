@@ -1,5 +1,6 @@
 package com.slip.controller;
 
+import com.slip.Entitiy.User;
 import com.slip.response.ReservationResponse;
 import com.slip.service.ReservationService;
 import com.slip.vo.ReservationRequest;
@@ -27,5 +28,11 @@ public class ReservationController {
     @GetMapping("/reservation/{facilityId}")
     public List<ReservationResponse> get(@PathVariable Long facilityId){
         return reservationService.get(facilityId);
+    }
+
+    //내가 예약한 글 조회
+    @GetMapping("/reservation/user/{userId}")
+    public List<ReservationResponse> getUser(@PathVariable User userId){
+        return reservationService.getUser(userId);
     }
 }

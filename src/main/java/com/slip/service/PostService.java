@@ -63,7 +63,7 @@ public class PostService {
 
 
     //게시글 내가 쓴글 조회
-    public List<PostResponse> getUser(Long userIdx) {
+    public List<PostResponse> getUser(User userIdx) {
         return postRepository.findByUserIdxOrderByIdDesc(userIdx);
     }
 

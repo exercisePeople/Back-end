@@ -2,6 +2,7 @@ package com.slip.vo;
 
 
 import com.slip.Entitiy.User;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
@@ -12,6 +13,8 @@ import javax.validation.constraints.Min;
 
 @Getter
 @Setter
+@Builder
+@AllArgsConstructor
 public class ReservationRequest {
 
     private Long facilityId;
@@ -21,12 +24,4 @@ public class ReservationRequest {
     private String resName;
 
     private String resLocation;
-
-    @Builder
-    public ReservationRequest(User user, Long facilityId,String resName, String resLocation){
-        this.user =user;
-        this.facilityId = facilityId;
-        this.resName = resName;
-        this.resLocation = resLocation;
-    }
 }

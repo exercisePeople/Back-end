@@ -1,5 +1,6 @@
 package com.slip.controller;
 
+import com.slip.Entitiy.User;
 import com.slip.repository.PostRepository;
 import com.slip.response.CommentResponse;
 import com.slip.response.PostListResponse;
@@ -74,9 +75,10 @@ public class BoardController {
 
     // 유저 게시블 조회(내가쓴글 조회)
     @GetMapping("/posts/user/{userIdx}")
-    public List<PostResponse> getUser(@PathVariable Long userIdx) {
+    public List<PostResponse> getUser(@PathVariable User userIdx) {
         return postService.getUser(userIdx);
     }
+
 
     //카테고리 별 게시판 조회
     @GetMapping("/posts/category/{category}")
