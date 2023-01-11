@@ -12,7 +12,6 @@ import com.slip.vo.PostCreate;
 import com.slip.vo.PostEdit;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,19 +23,10 @@ import java.util.List;
 public class BoardController {
 
 
-
     private final PostService postService;
     private final CommentService commentService;
 
-    private final PostRepository postRepository;
-
-    // 연결 성공 조회
-    @GetMapping("/")
-    public String home() {
-        return "AWS 연결 성공";
-    }
-
-
+    //todo: 데이터베이스 H2로 변경하고 gradle multi Module 생성해보기
     //게시글 생성
     @PostMapping("/posts/{id}/create")
     public void post(@PathVariable Long id, @RequestBody @Valid PostCreate postCreate) {
